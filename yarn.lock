@@ -214,7 +214,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@joltdesign/vite-dev-server-marker@workspace:."
   dependencies:
-    "@types/node": "npm:^24.0.14"
+    "@types/node": "npm:^24.0.15"
     typescript: "npm:^5.8.3"
     vite: "npm:^7.0.5"
   peerDependencies:
@@ -398,7 +398,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24.0.14":
+"@types/node@npm:^24.0.15":
   version: 24.0.15
   resolution: "@types/node@npm:24.0.15"
   dependencies:
