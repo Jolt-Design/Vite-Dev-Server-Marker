@@ -22,11 +22,18 @@ export default function joltDevServerMarker(): PluginOption {
 	let wroteFile = false
 	let cleanupRegistered = false
 	let isDevServer = false
+	let recreateInterval: NodeJS.Timeout | null = null
+	let createdTime: string | null = null
 
 	const cleanUpFile = () => {
 		if (wroteFile) {
 			rmSync(MARKER_FILE)
 			wroteFile = false
+		}
+
+		if (recreateInterval) {
+			clearInterval(recreateInterval)
+			recreateInterval = null
 		}
 	}
 
@@ -40,15 +47,34 @@ export default function joltDevServerMarker(): PluginOption {
 				return
 			}
 
-			const content = {
-				pid: process.pid,
-				serverPort: isDevServer
-					? this.environment?.config?.server?.port || null
-					: null,
+			// Record the initial created time
+			createdTime = new Date().toISOString()
+
+			const writeMarkerFile = async () => {
+				const content = {
+					pid: process.pid,
+					serverPort: isDevServer
+						? this.environment?.config?.server?.port || null
+						: null,
+					createdTime,
+					lastUpdated: new Date().toISOString(),
+				}
+
+				await writeFile(MARKER_FILE, JSON.stringify(content))
+				wroteFile = true
 			}
 
-			await writeFile(MARKER_FILE, JSON.stringify(content))
-			wroteFile = true
+			// Write initial marker file
+			await writeMarkerFile()
+
+			// Set up interval to recreate marker file every minute (60000ms)
+			recreateInterval = setInterval(async () => {
+				try {
+					await writeMarkerFile()
+				} catch (error) {
+					console.error('Failed to recreate marker file:', error)
+				}
+			}, 60000)
 
 			if (!cleanupRegistered) {
 				process.on('exit', cleanUpFile)
