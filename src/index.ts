@@ -21,6 +21,7 @@ const EXIT_SIGNALS = [
 export default function joltDevServerMarker(): PluginOption {
 	let wroteFile = false
 	let cleanupRegistered = false
+	let isDevServer = false
 
 	const cleanUpFile = () => {
 		if (wroteFile) {
@@ -31,14 +32,19 @@ export default function joltDevServerMarker(): PluginOption {
 
 	return {
 		name: 'jolt-dev-server-marker',
+		configResolved(config) {
+			isDevServer = config.command === 'serve'
+		},
 		async buildStart(): Promise<void> {
-			if (this.environment.mode !== 'dev') {
+			if (!isDevServer) {
 				return
 			}
 
 			const content = {
 				pid: process.pid,
-				serverPort: this.environment.config.server.port,
+				serverPort: isDevServer
+					? this.environment?.config?.server?.port || null
+					: null,
 			}
 
 			await writeFile(MARKER_FILE, JSON.stringify(content))
