@@ -10,7 +10,7 @@
 		"noUncheckedIndexedAccess": true,
 		"verbatimModuleSyntax": true,
 		"skipLibCheck": true,
-    "outDir": "dist"
+		"outDir": "dist"
 	},
 	"include": [
 		"src/index.ts"
