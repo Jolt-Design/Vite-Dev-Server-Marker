@@ -44,13 +44,55 @@ export default function joltDevServerMarker(): PluginOption {
 		}
 	}
 
+	const isProbablyPingOperation = () => {
+		// Check for explicit esbuild ping environment variable
+		if (process.env.ESBUILD_PING === 'true') {
+			return true
+		}
+
+		// Check if we're in a test context (Vitest, Jest, etc.)
+		if (
+			process.env.VITEST === 'true' ||
+			process.env.NODE_ENV === 'test' ||
+			process.env.JEST_WORKER_ID !== undefined
+		) {
+			return true
+		}
+
+		// Check for VS Code extension context
+		if (
+			process.env.VSCODE_PID !== undefined ||
+			process.env.VSCODE_AMD_ENTRYPOINT !== undefined
+		) {
+			return true
+		}
+
+		// Check if the parent process suggests this is a tooling operation
+		try {
+			const ppid = process.ppid
+			if (
+				ppid &&
+				process.env._ &&
+				(process.env._.includes('vitest') ||
+					process.env._.includes('jest') ||
+					process.env._.includes('esbuild'))
+			) {
+				return true
+			}
+		} catch {
+			// Ignore errors accessing process info
+		}
+
+		return false
+	}
+
 	return {
 		name: 'jolt-dev-server-marker',
 		configResolved(config) {
 			isDevServer = config.command === 'serve'
 		},
 		async buildStart(): Promise<void> {
-			if (!isDevServer) {
+			if (!isDevServer || isProbablyPingOperation()) {
 				return
 			}
 
