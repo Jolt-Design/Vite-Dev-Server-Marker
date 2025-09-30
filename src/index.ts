@@ -2,6 +2,13 @@ import { rmSync } from 'node:fs'
 import { writeFile } from 'node:fs/promises'
 import type { PluginOption } from 'vite'
 
+interface MarkerFileContent {
+	pid: number
+	serverPort: number | null
+	createdTime: string
+	lastUpdated: string
+}
+
 const MARKER_FILE = '.jolt-marker.tmp'
 const EXIT_SIGNALS = [
 	'SIGABRT',
@@ -51,12 +58,12 @@ export default function joltDevServerMarker(): PluginOption {
 			createdTime = new Date().toISOString()
 
 			const writeMarkerFile = async () => {
-				const content = {
+				const content: MarkerFileContent = {
 					pid: process.pid,
 					serverPort: isDevServer
 						? this.environment?.config?.server?.port || null
 						: null,
-					createdTime,
+					createdTime: createdTime ?? '',
 					lastUpdated: new Date().toISOString(),
 				}
 
