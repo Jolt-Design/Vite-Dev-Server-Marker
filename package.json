@@ -9,7 +9,7 @@
 		"tsconfig.json"
 	],
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.8",
+		"@biomejs/biome": "^2.4.9",
 		"@types/node": "^24.12.0",
 		"typescript": "^5.9.3",
 		"vite": "^8.0.2"
