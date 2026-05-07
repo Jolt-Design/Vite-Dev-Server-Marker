@@ -7,11 +7,17 @@
 	},
 	"files": {
 		"ignoreUnknown": true,
-		"includes": ["src/**/*", "*.json"]
+		"includes": [
+			"src/**/*",
+			"*.json",
+			".vscode/*.json",
+			".github/workflows/*.yml",
+			"*.md"
+		]
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"useEditorconfig": true
 	},
 	"linter": {
 		"enabled": true,
