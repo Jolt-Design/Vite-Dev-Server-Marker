@@ -1,4 +1,11 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["github>Jolt-Design/Renovate-Config"]
+	"extends": ["github>Jolt-Design/Renovate-Config"],
+	"packageRules": [
+		{
+			"matchFileNames": [".github/workflows/*.yml"],
+			"matchPackageNames": ["node"],
+			"rangeStrategy": "replace"
+		}
+	]
 }
