@@ -5,7 +5,8 @@
 		{
 			"matchFileNames": [".github/workflows/*.yml"],
 			"matchPackageNames": ["node"],
-			"rangeStrategy": "replace"
+			"rangeStrategy": "replace",
+			"versioning": "semver-partial"
 		}
 	]
 }
