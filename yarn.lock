@@ -138,7 +138,7 @@ __metadata:
   resolution: "@joltdesign/vite-dev-server-marker@workspace:."
   dependencies:
     "@biomejs/biome": "npm:^2.4.16"
-    "@types/node": "npm:^24.13.0"
+    "@types/node": "npm:^24.13.1"
     typescript: "npm:^6.0.3"
     vite: "npm:^8.0.16"
   peerDependencies:
@@ -290,7 +290,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^24.13.0":
+"@types/node@npm:^24.13.1":
   version: 24.13.1
   resolution: "@types/node@npm:24.13.1"
   dependencies:
