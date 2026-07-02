@@ -4,7 +4,7 @@
 	"packageRules": [
 		{
 			"matchFileNames": [".github/workflows/*.yml"],
-			"matchPackageNames": ["node"],
+			"matchPackageNames": ["node", "actions/node-versions"],
 			"enabled": false
 		}
 	]
