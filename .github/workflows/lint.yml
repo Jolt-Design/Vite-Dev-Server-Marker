@@ -15,10 +15,10 @@ jobs:
       - name: Enable Corepack
         run: npm install -g corepack
 
-      - name: Use Node.js 24
+      - name: Use Node.js 26
         uses: actions/setup-node@v6
         with:
-          node-version: 24.x
+          node-version: 26.x
           cache: yarn
 
       - run: corepack yarn install --immutable
