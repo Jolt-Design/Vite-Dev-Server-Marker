@@ -21,5 +21,5 @@ jobs:
       - name: Enable Corepack
         run: npm install -g corepack
 
-      - run: yarn install --immutable
-      - run: yarn run biome ci
+      - run: corepack yarn install --immutable
+      - run: corepack yarn run biome ci

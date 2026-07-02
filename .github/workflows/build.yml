@@ -26,5 +26,5 @@ jobs:
       - name: Enable Corepack
         run: npm install -g corepack
 
-      - run: yarn install --immutable
-      - run: yarn run build
+      - run: corepack yarn install --immutable
+      - run: corepack yarn run build
