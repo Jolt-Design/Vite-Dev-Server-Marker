@@ -3,5 +3,5 @@
 		"**/.yarn": true,
 		"**/.pnp.*": true
 	},
-	"js/ts.tsdk.promptToUseWorkspaceVersion": true,
+	"js/ts.tsdk.promptToUseWorkspaceVersion": true
 }
