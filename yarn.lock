@@ -5,7 +5,7 @@ __metadata:
   version: 10
   cacheKey: 10c0
 
-"@biomejs/biome@npm:^2.6.7":
+"@biomejs/biome@npm:2.6.7":
   version: 2.6.7
   resolution: "@biomejs/biome@npm:2.6.7"
   dependencies:
@@ -129,7 +129,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@joltdesign/vite-dev-server-marker@workspace:."
   dependencies:
-    "@biomejs/biome": "npm:^2.6.7"
+    "@biomejs/biome": "npm:2.6.7"
     "@types/node": "npm:^24.19.2"
     typescript: "npm:^7.0.2"
     vite: "npm:^8.3.8"
